@@ -1,4 +1,5 @@
 let username = '';
+let messages = []; // Array to store messages
 
 function joinChat() {
   const usernameInput = document.getElementById('username').value;
@@ -26,13 +27,47 @@ function joinChat() {
 function sendMessage() {
   const messageInput = document.getElementById('messageInput').value;
   if (messageInput.trim() !== '') {
-    const chatMessages = document.getElementById('chatMessages');
-    const newMessage = document.createElement('div');
-    newMessage.innerHTML = `<strong>${username}</strong>: ${messageInput}`;
-    chatMessages.appendChild(newMessage);
-    document.getElementById('messageInput').value = ''; // Clear input
-    chatMessages.scrollTop = chatMessages.scrollHeight; // Auto scroll to bottom
+    // Push the new message into the messages array
+    messages.push({ user: username, message: messageInput });
+
+    // Clear input field
+    document.getElementById('messageInput').value = '';
+
+    // Update chat messages display
+    updateChatMessages();
   } else {
     alert('Please enter a message');
   }
+}
+
+function updateChatMessages() {
+  const chatMessages = document.getElementById('chatMessages');
+  chatMessages.innerHTML = ''; // Clear previous messages
+
+  // Loop through the messages array and display each one
+  messages.forEach(msg => {
+    const newMessage = document.createElement('div');
+    newMessage.innerHTML = `<strong style="color: #00ffcc;">${msg.user}</strong>: ${msg.message}`;
+    newMessage.style.color = 'white'; // Make message text white
+    chatMessages.appendChild(newMessage);
+  });
+
+  // Auto scroll to bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function updateChatMessages() {
+  const chatMessages = document.getElementById('chatMessages');
+  chatMessages.innerHTML = ''; // Clear previous messages
+
+  // Loop through the messages array and display each one
+  messages.forEach(msg => {
+    const newMessage = document.createElement('div');
+    newMessage.innerHTML = `<strong class="rgb-username">${msg.user}</strong>: ${msg.message}`;
+    newMessage.style.color = 'white'; // Ensure the message text is white
+    chatMessages.appendChild(newMessage);
+  });
+
+  // Auto scroll to bottom
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 }

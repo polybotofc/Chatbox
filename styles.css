@@ -143,3 +143,17 @@ body {
 .credits a:hover {
   text-decoration: underline;
 }
+
+@keyframes rgbColor {
+  0% { color: #ff0000; }
+  25% { color: #00ff00; }
+  50% { color: #0000ff; }
+  75% { color: #ffff00; }
+  100% { color: #ff00ff; }
+}
+
+/* Apply RGB animation to username */
+.rgb-username {
+  animation: rgbColor 2s infinite;
+  font-weight: bold;
+}
